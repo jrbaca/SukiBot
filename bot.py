@@ -23,4 +23,13 @@ async def on_member_join(member):
         f'Hi {member.name}, welcome to my empire!'
     )
 
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content == 'ping!':
+        await message.channel.send("pong!")
+
 client.run(TOKEN)
