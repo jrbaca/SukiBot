@@ -1,35 +1,17 @@
 import os
 
-import discord
 from dotenv import load_dotenv
 
-intents = discord.Intents.default()
-intents.members = True
-
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
-
-client = discord.Client(intents=intents)
+from DiscordClient import DiscordClient
 
 
-@client.event
-async def on_ready():
-    print(f'{client.user} has connected to Discord!')
+def main():
+    load_dotenv()
+    token = os.getenv('DISCORD_TOKEN')
+
+    client = DiscordClient()
+    client.run(token)
 
 
-@client.event
-async def on_member_join(member):
-    await client.get_channel(818248549300437055).send(
-        f'Hi {member.name}, welcome to my empire!'
-    )
-
-
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    if message.content == 'ping!':
-        await message.channel.send("pong!")
-
-client.run(TOKEN)
+if __name__ == "__main__":
+    main()
