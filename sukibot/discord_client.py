@@ -1,5 +1,5 @@
 import discord
-
+import logging
 
 class DiscordClient(discord.Client):
     
@@ -9,7 +9,7 @@ class DiscordClient(discord.Client):
         super().__init__(intents=intents)
 
     async def on_ready(self):
-        print(f'{self.user} has connected to Discord!')
+        logging.info(f'{self.user} has connected to Discord!')
 
     async def on_member_join(self, member):
         await self.get_channel(818248549300437055).send(
