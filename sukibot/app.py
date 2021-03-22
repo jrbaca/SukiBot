@@ -8,8 +8,8 @@ from dotenv import load_dotenv
 from sukibot.discord_client import DiscordClient
 from sukibot.handlers import BaseIntent
 from sukibot.handlers import HandlerInput, HandlerResponse
-from sukibot.handlers.list_action import CreateListIntent
-from sukibot.handlers.ping_pong_action import PingPongIntent
+from sukibot.handlers.list_action_handlers import CreateListIntent
+from sukibot.handlers.ping_pong_handlers import PingPongIntent
 
 
 class SukiBot:
