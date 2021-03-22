@@ -8,3 +8,11 @@ class PingPongIntent(BaseIntent):
     def handle(self, handler_input: HandlerInput) -> HandlerResponse:
         response = handler_input.get_handler_response()
         return response.with_message("pong!")
+
+class PingPongEvil(BaseIntent):
+    def can_handle(self, handler_input: HandlerInput) -> bool:
+        return handler_input.message == "pong!"
+
+    def handle(self, handler_input: HandlerInput) -> HandlerResponse:
+        response = handler_input.get_handler_response()
+        return response.with_message("EW!")

@@ -10,7 +10,7 @@ from sukibot.discord_client import DiscordClient
 from sukibot.handlers import BaseIntent
 from sukibot.handlers import HandlerInput, HandlerResponse
 from sukibot.handlers.list_action_handlers import CreateListIntent
-from sukibot.handlers.ping_pong_handlers import PingPongIntent
+from sukibot.handlers.ping_pong_handlers import PingPongIntent, PingPongEvil
 
 
 class SukiBot:
@@ -51,7 +51,8 @@ def run():
 
     sukibot.register_intents(
         PingPongIntent(),
-        CreateListIntent()
+        CreateListIntent(),
+        PingPongEvil()
     )
 
     sukibot.run()
