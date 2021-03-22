@@ -1,12 +1,22 @@
-import discord
 import logging
 
+import discord
+
+import sukibot.app as sb
+
+
 class DiscordClient(discord.Client):
-    
-    def __init__(self):
+
+    def __init__(self, token):
+        self._token = token
+        self._sukibot: 'sb.SukiBot' = None
+
         intents = discord.Intents.default()
         intents.members = True
         super().__init__(intents=intents)
+
+    def set_sukibot(self, sukibot: 'sb.SukiBot'):
+        self._sukibot = sukibot
 
     async def on_ready(self):
         logging.info(f'{self.user} has connected to Discord!')
@@ -20,5 +30,8 @@ class DiscordClient(discord.Client):
         if message.author == self.user:
             return
 
-        if message.content == 'ping!':
-            await message.channel.send("pong!")
+        response = self._sukibot.handle_message(message)
+        await message.channel.send(response.message)
+
+    def run(self):
+        super().run(self._token)
