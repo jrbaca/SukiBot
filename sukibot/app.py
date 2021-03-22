@@ -1,6 +1,7 @@
 import logging
 import logging.config
 import os
+from typing import Optional
 
 from discord.message import Message
 from dotenv import load_dotenv
@@ -27,13 +28,15 @@ class SukiBot:
     def run(self):
         self._client.run()
 
-    def handle_message(self, message: Message) -> HandlerResponse:
+    def handle_message(self, message: Message) -> Optional[HandlerResponse]:
         handler_input = HandlerInput(message.content)
 
         for intent in self._registered_intents:
             can_handle = intent.can_handle(handler_input)
             if can_handle:
                 return intent.handle(handler_input)
+
+        return None
 
 
 def run():

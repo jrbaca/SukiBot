@@ -3,13 +3,14 @@ import logging
 import discord
 
 import sukibot.app as sb
+from typing import Optional
 
 
 class DiscordClient(discord.Client):
 
     def __init__(self, token):
         self._token = token
-        self._sukibot: 'sb.SukiBot' = None
+        self._sukibot: Optional['sb.SukiBot'] = None
 
         intents = discord.Intents.default()
         intents.members = True
@@ -31,7 +32,9 @@ class DiscordClient(discord.Client):
             return
 
         response = self._sukibot.handle_message(message)
-        await message.channel.send(response.message)
+
+        if response is not None:
+            await message.channel.send(response.message)
 
     def run(self):
         super().run(self._token)
