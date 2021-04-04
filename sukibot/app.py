@@ -11,6 +11,7 @@ from sukibot.handlers import BaseIntent
 from sukibot.handlers import HandlerInput, HandlerResponse
 from sukibot.handlers.list_action_handlers import CreateListIntent
 from sukibot.handlers.ping_pong_handlers import PingPongIntent, PingPongEvil
+from sukibot.handlers.give_me_blank_handlers import GiveMeSomethingIntent
 
 
 class SukiBot:
@@ -52,7 +53,8 @@ def run():
     sukibot.register_intents(
         PingPongIntent(),
         CreateListIntent(),
-        PingPongEvil()
+        PingPongEvil(),
+        GiveMeSomethingIntent()
     )
 
     sukibot.run()
